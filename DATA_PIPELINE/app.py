@@ -4,4 +4,5 @@ def saudacao():
         name = input('What is your name: ')
         print(f'Welcome Mr.{name}')
 
-saudacao()
+if __name__ == '__main__':
+    saudacao()
