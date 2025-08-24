@@ -1,0 +1,19 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server
+    container_name: clickhouseSGBD
+    environment:
+      CLICKHOUSE_USER: admin
+      CLICKHOUSE_PASSWORD: 123
+      CLICKHOUSE_DB: my_database
+    ports:
+      - "8123:8123" # interface http
+      - "9000:9000" # cliente nativo
+    volumes:
+      - ./data_files:/var/lib/clickhouse # persistencia de dados
+    networks:
+      - ch_network
+
+networks:
+  ch_network:
+    driver: bridge
