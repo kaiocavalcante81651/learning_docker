@@ -1,0 +1,24 @@
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "8000:9000" # Porta para a API
+      - "9001:901"  # Porta para a web UI
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    volumes:
+      - minio_data:/data  # Persitência de dados
+    command: server /data --console-address ":9001"
+    restart: always
+    
+  app:
+    build: .
+    depends_on:
+      - minio
+    restart: on-failure
+
+volumes:
+  minio_data:
+    driver: local
