@@ -1,0 +1,14 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "8123:8123" # Interface HTTP
+      - "9000:9000" # clickhouse-client
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse        # Persistência de dados
+      - clickhouse-logs:/var/log/clickhouse-server # Armazenamento de logs
+
+volumes:
+  clickhouse-data:
+  clickhouse-logs:
